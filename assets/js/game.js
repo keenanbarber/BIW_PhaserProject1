@@ -1,10 +1,13 @@
 var snake, apple, squareSize, score, speed, updateDelay, direction, new_direction, 
 	addNew, cursors, scoreTextValue, speedTextValue, textStyle_Key, textStyle_Value;
 
+var audioEffect;
+
 var Game = {
 	preload: function() {
 		game.load.image('snake', './assets/images/snake.png');
 		game.load.image('apple', './assets/images/apple.png');
+		game.load.audio('sound', 'assets/audio/Beep1.wav');
 	}, 
 
 	create: function() {
@@ -43,6 +46,10 @@ var Game = {
 		// Speed
 		game.add.text(500, 20, "SPEED", textStyle_Key);
 		speedTextValue = game.add.text(558, 18, speed.toString(), textStyle_Value); 
+
+		// AUDIO
+		audioEffect = game.add.audio('sound');
+		audioEffect.onStop.add(this.soundStopped, this);
 	}, 
 
 	update: function() {
@@ -168,9 +175,10 @@ var Game = {
 	            // Refresh scoreboard.
 	            scoreTextValue.text = score.toString();
 
+	            // Play sound.
+	            this.playFx();
 	        }
 	    }
-
 	},
 
 	selfCollision: function(head) {
@@ -196,5 +204,18 @@ var Game = {
 	        game.state.start('Game_Over');
 	    }
 
+	},
+
+	playFx: function() {
+        audioEffect.play();
+        console.log("Audio started.");
+	},
+
+	soundStopped: function(sound) {
+		console.log("Audio stopped.");
 	}
 };
+
+
+
+
