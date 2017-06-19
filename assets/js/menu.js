@@ -3,7 +3,7 @@ var Menu = {
 		// Loading the images is required so that later on we can create sprites based on them. 
 		// The first argument is how our image will be refered to, 
 		// with the second argument being the path to the file. 
-		game.load.image('menu', './assets/images/menu.png')
+		game.load.image('menu', './assets/images/menu.png');
 	}, 
 
 	create: function() {
